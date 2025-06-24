@@ -35,7 +35,7 @@ function App() {
     <Router>
       <div className="App">
         {isAuthenticated && <Navbar />} {/* Affiche la Navbar si l'utilisateur est connecté */}
-        <div className="main-content"> {/* Optionnel: pour le stylisme du contenu principal sous la navbar */}
+        <div className="main-content"> 
           </div>
         <Routes>
           {/* Route de login */}
