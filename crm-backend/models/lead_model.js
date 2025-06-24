@@ -17,8 +17,8 @@ const leadSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['PENDING', 'IN_PROGRESS', 'COMPLETED', 'CANCELED'], // Statuts possibles
-    default: 'PENDING' // Statut par défaut
+    enum: ['PENDING', 'IN_PROGRESS', 'COMPLETED', 'CANCELED'], 
+    default: 'PENDING' 
   },
   manager: { // Référence au manager à qui ce lead est assigné
     type: mongoose.Schema.Types.ObjectId,

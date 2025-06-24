@@ -1,6 +1,5 @@
-// crm-backend/config/db.js
 const mongoose = require('mongoose');
-require('dotenv').config(); // Pour charger les variables d'environnement
+require('dotenv').config(); 
 
 const connectDB = async () => {
   try {

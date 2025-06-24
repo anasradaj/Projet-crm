@@ -11,11 +11,19 @@ connectDB();
 
 const app = express();
 
+// 1. Configuration CORS explicite (DOIT VENIR AVANT express.json() si 'credentials' est utilisé)
+const corsOptions = {
+  origin: 'http://localhost:5173', // L'URL de votre frontend Vite
+  credentials: true, // Autorise l'envoi de cookies et d'en-têtes d'authentification
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], // Méthodes HTTP autorisées
+  allowedHeaders: ['Content-Type', 'Authorization'], // En-têtes HTTP autorisés
+};
+app.use(cors(corsOptions)); // Utilisez cors avec les options définies
+
+
 // Middleware pour parser le JSON des requêtes (équivalent de body-parser)
 app.use(express.json());
 
-// Middleware CORS pour permettre les requêtes depuis le frontend React
-app.use(cors());
 
 // Route de test simple
 app.get('/', (req, res) => {

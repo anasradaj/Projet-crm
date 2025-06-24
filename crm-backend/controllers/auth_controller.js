@@ -1,5 +1,5 @@
-const User = require('../models/user_model'); // Import du modèle User
-const generateToken = require('../utils/generateToken'); // Import de l'utilitaire de token
+const User = require('../models/user_model'); 
+const generateToken = require('../utils/generateToken'); 
 
 // @desc    Auth user & get token
 // @route   POST /api/auth/login

@@ -1,18 +1,17 @@
-// crm-backend/models/user.model.js
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs'); // Pour le hachage des mots de passe
+const bcrypt = require('bcryptjs'); 
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Le nom est requis'] // Le nom est obligatoire
+    required: [true, 'Le nom est requis'] 
   },
   email: {
     type: String,
     required: [true, 'L\'email est requis'],
-    unique: true, // L'email doit être unique
-    lowercase: true, // Convertir l'email en minuscules avant de sauvegarder
-    match: [/.+@.+\..+/, 'Veuillez entrer un email valide'] // Validation de format d'email
+    unique: true, 
+    lowercase: true,
+    match: [/.+@.+\..+/, 'Veuillez entrer un email valide']
   },
   password: {
     type: String,
@@ -21,11 +20,11 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['employer', 'manager'], // Le rôle ne peut être que 'employer' ou 'manager'
-    default: 'manager' // Rôle par défaut si non spécifié
+    enum: ['employer', 'manager'], 
+    default: 'manager' 
   },
 }, {
-  timestamps: true // Ajoute createdAt et updatedAt automatiquement
+  timestamps: true 
 });
 
 // Middleware Mongoose pour hacher le mot de passe avant de sauvegarder l'utilisateur
