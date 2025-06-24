@@ -9,7 +9,6 @@ import Navbar from './components/Navbar';
 import EmployerDashboard from './pages/EmployerDashboardPage'; // 
 
 // Placeholder pour les futures pages
-// const EmployerManagers = () => <div>Employer Managers</div>;
 const EmployerLeads = () => <div>Employer Leads</div>;
 const ManagerLeads = () => <div>Manager Leads</div>;
 
