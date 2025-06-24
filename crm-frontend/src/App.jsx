@@ -28,6 +28,7 @@ const PrivateRoute = ({ children, allowedRoles }) => {
   return children; // Rendre le composant enfant si autorisé
 };
 
+
 function App() {
   const isAuthenticated = localStorage.getItem('jwtToken') !== null;
 
