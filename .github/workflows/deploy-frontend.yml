@@ -1,0 +1,36 @@
+name: Deploy CRM Frontend to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Déclencher le workflow lors d'un push sur la branche main
+    paths:
+      - 'crm-frontend/**' # Ne déclencher que si des changements dans le dossier crm-frontend
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # Exécuter sur une machine virtuelle Ubuntu
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Cloner le dépôt
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Utiliser Node.js 20 (ou votre version préférée)
+
+      - name: Install Frontend dependencies
+        run: npm install
+        working-directory: ./crm-frontend # S'exécuter dans le dossier crm-frontend
+
+      - name: Build Frontend
+        run: npm run build
+        working-directory: ./crm-frontend # S'exécuter dans le dossier crm-frontend
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3 # Action pour déployer sur GitHub Pages
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Token généré automatiquement
+          publish_dir: ./crm-frontend/dist # C'est le dossier que GitHub Pages doit servir !
+          cname: anaradaj.github.io # Facultatif: si vous avez un domaine personnalisé (ici votre domaine GH Pages)
