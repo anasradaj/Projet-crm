@@ -3,34 +3,40 @@ name: Deploy CRM Frontend to GitHub Pages
 on:
   push:
     branches:
-      - main # Déclencher le workflow lors d'un push sur la branche main
+      - main
     paths:
-      - 'crm-frontend/**' # Ne déclencher que si des changements dans le dossier crm-frontend
+      - 'crm-frontend/**'
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest # Exécuter sur une machine virtuelle Ubuntu
+    runs-on: ubuntu-latest
+    # Ajout de permissions explicites pour le job
+    permissions:
+      contents: write # Permet d'écrire sur le dépôt (nécessaire pour pousser sur gh-pages ou main)
+      pages: write    # Permet de déployer sur GitHub Pages
+      id-token: write # Nécessaire pour l'authentification OIDC de Pages
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4 # Cloner le dépôt
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Utiliser Node.js 20 (ou votre version préférée)
+          node-version: '20'
 
       - name: Install Frontend dependencies
         run: npm install
-        working-directory: ./crm-frontend # S'exécuter dans le dossier crm-frontend
+        working-directory: ./crm-frontend
 
       - name: Build Frontend
         run: npm run build
-        working-directory: ./crm-frontend # S'exécuter dans le dossier crm-frontend
+        working-directory: ./crm-frontend
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3 # Action pour déployer sur GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }} # Token généré automatiquement
-          publish_dir: ./crm-frontend/dist # C'est le dossier que GitHub Pages doit servir !
-          # cname: anaradaj.github.io # Facultatif: si vous avez un domaine personnalisé (ici votre domaine GH Pages)
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./crm-frontend/dist # Le dossier à déployer
+          publish_branch: gh-pages # <-- C'est la branche où le site sera déployé (créée si elle n'existe pas)
+          # cname: anaradaj.github.io # Laissez cette ligne commentée pour l'instant
