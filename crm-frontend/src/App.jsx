@@ -33,7 +33,7 @@ function App() {
   const isAuthenticated = localStorage.getItem('jwtToken') !== null;
 
   return (
-    <Router basename="/Projet-crm">
+    <Router basename="/Projet-crm/">
       <div className="App">
         {isAuthenticated && <Navbar />} {/* Affiche la Navbar si l'utilisateur est connecté */}
         <div className="main-content"> 
